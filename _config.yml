@@ -2,6 +2,9 @@ title: Output Blog
 email: takenakaeri0423@gmail.com
 description: A Blog Theme by Start Bootstrap
 author: Start Bootstrap
+# 開発用
+# baseurl: "/startbootstrap-clean-blog-jekyll"
+# 本番用（GitHub Pages）
 baseurl: "/output_blog"
 url: "https://github.com/TakenakaEri"
 

@@ -5,10 +5,8 @@ author: Start Bootstrap
 # 本番用（GitHub Pages）
 baseurl: "/output_blog"
 url: "https://github.com/TakenakaEri"
-# 開発用設定
-development:
-  url: "http://127.0.0.1:4000"
-  baseurl: "/startbootstrap-clean-blog-jekyll"
+# 開発用
+# baseurl: "/startbootstrap-clean-blog-jekyll/"
 
 # Social Profiles
 twitter_username: nakayarn

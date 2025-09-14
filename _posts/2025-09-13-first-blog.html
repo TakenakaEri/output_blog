@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "アウトプット用のブログ作成"
-subtitle: "記事を参考にGitHubPagesでブログを作成してみた学び"
-date: 2025-09-13 10:45:13 -0400
-background: "/img/posts/06.jpg"
+subtitle: "記事を参考にGitHub Pagesでブログを作成してみた"
+date: 2025-09-13
+background: "/img/bg-about.jpg"
 ---
 
 <p>
@@ -11,32 +11,105 @@ background: "/img/posts/06.jpg"
   作成方法は以下のURLを参考にさせていただきました。
 </p>
 
-<a href="https://qiita.com/madoreenu/items/b47833bf785562c77819"
-  >ゼロからわかる！GitHub Pagesを使った自前無料ブログの作り方（Jekyll）</a
->
-
-<p><strong>構築環境</strong><br /></p>
-
-<h2>ローカルのURL</h2>
-記事の中で「XXXX」と記載があったのですが、アクセスしてみるとエラーが出ていました。
-
-<h2>開発環境と本番環境の設定の追加</h2>
-
-<h2>感想</h2>
-<h3>Jekyllについて</h3>
-<p>ここに感想を記載</p>
-
-<h3>GitHub Pagesについて</h3>
 <p>
-  今回初めて使用したのですが、驚くほど早くWebページを公開できて、便利だと思う反面、pushしてから公開までに少し時間がかかるところが気になりました。<br />
-  他のサーブビスを使用しても、デプロイが成功するまで少し時間がかかるものなので、目くじら立てるほどではないのですが、
-  他サービスである、「デプロイ時にログが走る」ということがないので、いつ終わるのかが可視化されていないのが原因ではないかと思います。（自分の気持ちの問題）<br />
-  総じて、簡単でGitHubが使える人なら使いやすいので、簡単な用途のサイトであれば、GitHub
-  Pagesで事足りると思います。（勉強のためにサイトを作成するなら、サーバーとかDBとか自分で設定したほうがいいと思います）
+  <a href="https://qiita.com/madoreenu/items/b47833bf785562c77819"
+    >ゼロからわかる！GitHub Pagesを使った自前無料ブログの作り方（Jekyll）</a
+  >
+</p>
+<p>
+  基本的に上記のブログを見ていただければ、爆速でサイトを公開することができると思います。
+</p>
+<h2>構築環境</h2>
+<ul>
+  <li>OS: macOS</li>
+  <li>Ruby: 3.3.0</li>
+  <li>Jekyll: 4.4.1</li>
+  <li>ホスティング: GitHub Pages</li>
+</ul>
+<p>
+  今回は、Dockerは使用せずに、記事通りローカル環境でRubyとJekyll(ジキル)を使用しました。
+</p>
+<h2>実装の際にであったエラー</h2>
+<h3>ローカルのURLの修正</h3>
+<p>
+  記事の中で「localhost:4000にアクセスするとサイトが見れる」と記載があったのですが、アクセスしてみるとエラー画面が出ていました。
+</p>
+<p>
+  実行ログを見ると
+  <div class = "code-gray">
+  <pre><code>
+    Server address: http://127.0.0.1:4000/startbootstrap-clean-blog-jekyll/
+  </pre></code>
+  </div>
+  とログが出ていたので、ログのURLにアクセスしてみるとサイトが表示されました。
+</p>
+<p>
+  これは、設定ファイルである<code>_config.yml</code>のbaseurlに設定を行っているため、サブディレクトリの指定が必要なためでした。
 </p>
 
-<img
-  class="img-fluid"
-  src="https://source.unsplash.com/Mn9Fa_wQH-M/800x450"
-  alt="Demo Image"
-/>
+<code>_config.yml</code>
+<div class = "code-gray">
+  <pre><code>
+  title: Output Blog 
+  email: takenakaeri0423@gmail.com 
+  description: 日々のひとこと学習ブログ 
+  author: Start 
+  Bootstrap url: "https://github.com/TakenakaEri" 
+  baseurl: "/startbootstrap-clean-blog-jekyll/"
+  </code></pre>
+</div>
+<p>
+  サブディレクトリの設定についてきちんと理解できていなかったので、勉強になりました。
+</p>
+
+<h3>開発環境と本番環境の設定の追加</h3>
+<p>
+  上記の<code>_config.yml</code>に関してですが、デフォルトのままだと開発環境用で、本番環境ではCSSが当たりませんでした。
+</p>
+<p>  原因は、設定ファイルで本番環境用のURLが登録されていなかったことだったので、本番環境用と開発環境でbaseurlの設定を変更することにしました。</p>
+<div class ="code-gray"><pre><code>
+  # 本番用（GitHub Pages）
+  baseurl: "/output_blog"
+  url: "https://github.com/TakenakaEri"
+  # 開発用
+  # baseurl: "/startbootstrap-clean-blog-jekyll/"<br>
+</code></pre></div>
+
+<p>GitHub Pagesでブログを公開する予定だったので、本番用のサブディレクトリは作成したリポジトリ名を指定しました。</p>
+<p>ゆくゆくは、本番用と開発用を自動で切り替えれるように設定しようかと思いますが、一旦コメントアウトで対応しています。</p>
+
+<h2>今回の学び</h2>
+<h3>Jekyllについて</h3>
+<p>GitHub上に公開されているテンプレートをZipファイル形式でダウンロードして使用したのが初めてだったので、良い経験になりました。</p>
+<p>このブログでは、技術的なことを書いていきたいと思っているので、SCSSは変更しないと見づらいなと感じているため、少しずつ手を加えていきたいと思います。</p>
+<p>なお、今回使用したテンプレートだと、ブログはHTML形式で記載するテンプレでしたが、Markdown形式で書けるほうがスピード感を持ってブログが作成できるのではないかなと思います。</p>
+<p>(私は勉強がてらこのままHTML形式で書いていこうと思います笑)</p>
+
+<p>※ なお、Jekyllのローカルサーバーでは、https非対応なようです。ローカルなので、私はそこまで気にせず使っていますが、気になる人は避けたほうがいいかもしれません。</p>
+<p>※ また、今回HTMLのフォーマットを使用していますが、ブログを書く際にHTMLの記述が間違っているとページが表示されないので、注意！！</p>
+<h4>ローカル非対応の弊害</h4>
+<ul>
+  <li>ブラウザAPIの制限(使えないAPIがある)</li>
+  <li>Service Workerが使えない(バックグラウンドで動くJavaScript)</li>
+  <li>Push通知が動作しない</li>
+  <li>セキュリティ機能の制限(Secure Cookie が設定できない)</li>
+  <li>本番環境との差異</li>
+  <li>Mixed Contentエラー(HTTPSとHTTPの差異による問題を事前に検知できない)</li>
+  <li>PWA開発時(HTTPでは必須機能が動作しない)</li>
+</ul>
+
+<p>なお、JekyllをHTTP化することはできるようなので、勉強がてらいつかやります←</p>
+
+<h3>GitHub Pagesについて</h3>
+<p>今回初めて使用したのですが、驚くほど早くWebページを公開できて、感動しました。</p>
+<p>簡単でGitHubが使える人なら使いやすいので、簡単な用途のサイトであれば、GitHub Pagesで事足りると思います。<br>
+  （勉強のためにサイトを作成するなら、サーバーとかDBとか自分で設定したほうがいいと思う）
+</p>
+
+<h2>改善したいこと</h2>
+<ul>
+  <li>SCSSの修正（コードを自然に読めるように）</li>
+  <li>JekyllをHTTP化する</li>
+  <li>設定ファイルを修正（本番用URLと開発用URLを自動で切り替えれるように設定）</li>
+  <li>ABOUT USなどの内容修正</li>
+</ul>

@@ -3,10 +3,10 @@ email: takenakaeri0423@gmail.com
 description: 日々のひとこと学習ブログ
 author: Start Bootstrap
 # 本番用（GitHub Pages）
-# baseurl: "/output_blog"
+baseurl: "/output_blog"
 url: "https://github.com/TakenakaEri"
 # 開発用
-baseurl: "/startbootstrap-clean-blog-jekyll/"
+# baseurl: "/startbootstrap-clean-blog-jekyll/"
 
 # Social Profiles
 twitter_username: nakayarn
